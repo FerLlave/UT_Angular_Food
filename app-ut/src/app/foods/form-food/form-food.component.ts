@@ -3,7 +3,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 
 
@@ -18,6 +18,15 @@ import { MatButton } from '@angular/material/button';
 
 
 export class FormFoodComponent {
+
+  foodForm = new FormGroup({
+    nombre : new FormControl('' , Validators.required),
+    categoria : new FormControl ('' , Validators.required),
+    descripcion : new FormControl('', Validators.required),
+    precio : new FormControl ('' , Validators.required),
+
+  });
+    
 
 }
 

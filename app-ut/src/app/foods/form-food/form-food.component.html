@@ -1,38 +1,48 @@
 
+<form [formGroup]="foodForm">
+
+<!-- nombre-->
+
 <p>
-    <mat-form-field appearance="fill">
-      <mat-label></mat-label>
-      <input matInput placeholder="Placeholder">
-      <mat-hint>Nombre</mat-hint>
+  <mat-form-field appearance="fill">
+    <mat-label for="nombre" >Nombre</mat-label>
+    <input id="nombre" type="text" [formControl]="nombre">
+    
+  </mat-form-field>
+</p>
+
+<!-- categoria-->
+ <div>
+  <mat-form-field>
+    <mat-label for="categoria">Categoría</mat-label>
+    
+    <mat-select id="categoria" type="" [formControl]="categoria" > 
+      <mat-option value="drink">Drink</mat-option>
+      <mat-option value="food">Food</mat-option>
+    </mat-select>
+    
+  </mat-form-field>
+</div>
+
+<!-- descripcion-->
+
+<p>
+  <mat-form-field appearance="fill">
+    <mat-label for="descripcion">Descripción</mat-label>
+    <textarea id="descripcion" type="text" [formControl]="descripcion"></textarea>
+  </mat-form-field>
+</p>
+
+<!-- precio-->
+<div>
+  <mat-form-field floatLabel="always">
+      <mat-label for="precio">Precio</mat-label>
+      <input id="precio" type="number"[formControl]="precio" matInput class="example-right-align" placeholder="0">
+      <span matTextPrefix>$&nbsp;</span>
+      <span matTextSuffix>.00</span>
     </mat-form-field>
-  </p>
+</div>
 
-   <div>
-    <mat-form-field>
-      <mat-label>Select</mat-label>
-      
-      <mat-select>
-        <mat-option value="drink">Drink</mat-option>
-        <mat-option value="food">Food</mat-option>
-      </mat-select>
-      <mat-hint align ="start">Categoría</mat-hint>
-    </mat-form-field>
-  </div>
+</form>
 
-
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Fill form field</mat-label>
-      <input matInput #input maxlength="20" placeholder="Placeholder">
-      <mat-hint>Descripción</mat-hint>
-    </mat-form-field>
-  </p>
-
-  <div>
-    <mat-form-field floatLabel="always">
-        <mat-label>Precio</mat-label>
-        <input matInput type="number" class="example-right-align" placeholder="0">
-        <span matTextPrefix>$&nbsp;</span>
-        <span matTextSuffix>.00</span>
-      </mat-form-field>
-  </div>
+ 
