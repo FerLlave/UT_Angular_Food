@@ -1,0 +1,38 @@
+
+<p>
+    <mat-form-field appearance="fill">
+      <mat-label></mat-label>
+      <input matInput placeholder="Placeholder">
+      <mat-hint>Nombre</mat-hint>
+    </mat-form-field>
+  </p>
+
+   <div>
+    <mat-form-field>
+      <mat-label>Select</mat-label>
+      
+      <mat-select>
+        <mat-option value="drink">Drink</mat-option>
+        <mat-option value="food">Food</mat-option>
+      </mat-select>
+      <mat-hint align ="start">Categoría</mat-hint>
+    </mat-form-field>
+  </div>
+
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Fill form field</mat-label>
+      <input matInput #input maxlength="20" placeholder="Placeholder">
+      <mat-hint>Descripción</mat-hint>
+    </mat-form-field>
+  </p>
+
+  <div>
+    <mat-form-field floatLabel="always">
+        <mat-label>Precio</mat-label>
+        <input matInput type="number" class="example-right-align" placeholder="0">
+        <span matTextPrefix>$&nbsp;</span>
+        <span matTextSuffix>.00</span>
+      </mat-form-field>
+  </div>
