@@ -21,6 +21,7 @@ export class FormFoodComponent{
     form = this.formBuilder.group({
     name:['', [Validators.required]],
     description:['', [Validators.required, Validators.minLength(20)]],
+    image:['', [Validators.required]],
     category:['',[Validators.required]],
     price:[,[Validators.required,Validators.min(1)]]
 
@@ -33,6 +34,22 @@ export class FormFoodComponent{
 
   get name(){
     return this.form.get('name');
+  }
+  
+  get description(){
+    return this.form.get('description');
+  }
+
+  get image(){
+    return this.form.get('image');
+  }
+
+  get category(){
+    return this.form.get('category');
+  }
+
+  get price(){
+    return this.form.get('price');
   }
 
 }
