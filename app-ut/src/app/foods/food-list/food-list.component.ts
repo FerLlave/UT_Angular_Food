@@ -12,13 +12,14 @@ import { FoodComponent } from '../food/food.component';
 })
 export class FoodListComponent implements OnInit {
     data:Food[]=[];
-  constructor(public serviceFood:FoodService){
-    
+
+  constructor(public serviceFood:FoodService){  
 
   }
 
   ngOnInit():void{
     this.data= this.serviceFood.getAllFoods();
+    console.log(this.data);
 
 
   }

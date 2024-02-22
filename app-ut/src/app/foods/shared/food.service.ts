@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Food } from './food.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -96,7 +98,21 @@ export class FoodService {
 
   return this.menu;
 
-
 }
+
+  public addFood (food:Food){
+
+    this.menu.push(food);
+
+  }
+
+  public deleteFood(food:Food){
+    this.menu.slice();
+
+  }
+
+  //public updateFood(food:Food){
+    //this.menu.splice();
+  //}
 
 }

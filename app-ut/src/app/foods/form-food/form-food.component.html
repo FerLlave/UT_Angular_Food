@@ -1,40 +1,3 @@
-<!--
-<form [formGroup]="foodForm">
- 
-  <mat-form-field appearance="fill">
-    <mat-label for="nombre" >Nombre</mat-label>
-    <input id="nombre" type="text" formControlName="nombre">
-    
-  </mat-form-field>
-
-
- 
-  <mat-form-field>
-    <mat-label for="categoria">Categoría</mat-label>
-    
-    <mat-select id="categoria" type="" formControlName="categoria"> 
-      <mat-option value="drink">Drink</mat-option>
-      <mat-option value="food">Food</mat-option>
-    </mat-select>
-    
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label for="descripcion">Descripción</mat-label>
-    <textarea id="descripcion" type="text" formControlName="descripcion"></textarea>
-  </mat-form-field>
-
-  <mat-form-field floatLabel="always">
-      <mat-label for="precio">Precio</mat-label>
-      <input id="precio" type="number"formControlName="precio" matInput class="example-right-align" placeholder="0">
-      <span matTextPrefix>$&nbsp;</span>
-      <span matTextSuffix>.00</span>
-    </mat-form-field>
-
-</form>
-
- precio-->
-
 <form [formGroup]="form" class="max-w-3xl">
 
   <!-- nombre-->
@@ -46,6 +9,22 @@
       <mat-error>
         @if (name?.hasError('required')){
 
+        <span class=" text-xs">Campo requerido</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <!-- imagen-->
+  <div class="example-container pb-2">
+    <mat-form-field class="w-full">
+      <mat-label>Imagen</mat-label>
+      <input matInput formControlName="image" required>
+      @if (image?.invalid && (image?.dirty || image?.touched)) {
+      <mat-error>
+        @if (image?.hasError('required')){
+
         <span class=" text-xs"> Campo requerido</span>
         }
       </mat-error>
@@ -54,24 +33,6 @@
 
     </mat-form-field>
   </div>
-
-  <!-- imagen-->
-<div class="example-container pb-2">
-  <mat-form-field class="w-full">
-    <mat-label>Imagen</mat-label>
-    <input matInput formControlName="image" required>
-    @if (image?.invalid && (image?.dirty || image?.touched)) {
-    <mat-error>
-      @if (image?.hasError('required')){
-
-      <span class=" text-xs"> Campo requerido</span>
-      }
-    </mat-error>
-    }
-
-
-  </mat-form-field>
-</div>
 
   <!-- descripcion-->
   <div class="example-container pb-2">
@@ -85,8 +46,9 @@
         <span class=" text-xs">Campo requerido</span>
         }
         @if(description?.hasError('minlenght')){
-        
-        <span class=" text-xs">Debe tener min {{description?.getError('minlenght').requiredLenght}} caracteres, hay {{description?.getError('minlenght').actualLenght}} </span>
+
+        <span class=" text-xs">Debe tener min {{description?.getError('minlenght').requiredLenght}} caracteres, hay
+          {{description?.getError('minlenght').actualLenght}} </span>
 
         }
       </mat-error>
@@ -96,50 +58,57 @@
     </mat-form-field>
   </div>
 
+  <!-- categoria-->
+  <div class="example-container pb-2">
+    <mat-form-field class="w-full">
+      <mat-label>Categoria</mat-label>
+      <mat-select id="categoria" type="" formControlName="category">
+        <mat-option value="drink">Bebida</mat-option>
+        <mat-option value="food">Comida</mat-option>
+      </mat-select>
 
-<!-- categoria-->
-<div class="example-container pb-2">
-  <mat-form-field class="w-full">
-    <mat-label>Categoria</mat-label>
-    <mat-select id="categoria" type="" formControlName="category"> 
-      <mat-option value="drink">Bebida</mat-option>
-      <mat-option value="food">Comida</mat-option>
-    </mat-select>
- 
-   
-    @if (category?.invalid && (category?.dirty || category?.touched)) {
-    <mat-error>
-      @if (category?.hasError('required')){
 
-      <span class=" text-xs"> Campo requerido</span>
+      @if (category?.invalid && (category?.dirty || category?.touched)) {
+      <mat-error>
+        @if (category?.hasError('required')){
+
+        <span class=" text-xs"> Campo requerido</span>
+        }
+      </mat-error>
       }
-    </mat-error>
-    }
 
-  </mat-form-field>
-</div>
+    </mat-form-field>
+  </div>
 
-<!-- precio-->
-<div class="example-container pb-2">
-  <mat-form-field class="w-full">
-    <mat-label>Precio</mat-label>
-    <input matInput type="number" placeholder="0" formControlName="price" required>
-    <span matTextPrefix>$&nbsp;</span>
+  <!-- precio-->
+  <div class="example-container pb-2">
+    <mat-form-field class="w-full">
+      <mat-label>Precio</mat-label>
+      <input matInput type="number" placeholder="0" formControlName="price" class="right-align" required>
+      <span matTextPrefix>$&nbsp;</span>
       <span matTextSuffix>.00</span>
-    @if (price?.invalid && (price?.dirty || price?.touched)) {
-    <mat-error>
-      @if (price?.hasError('required')){
+      @if (price?.invalid && (price?.dirty || price?.touched)) {
+      <mat-error>
+        @if (price?.hasError('required')){
 
-      <span class=" text-xs"> Campo requerido</span>
+        <span class=" text-xs"> Campo requerido</span>
+        }
+        @if (price?.hasError('min')) {
+        <span class=" text-xs"> El valor minimo es de {{price?.getError('min').min}}, el valor actual es de
+          {{price?.getError('min').actual}} </span>
+        }
+      </mat-error>
       }
-      @if (price?.hasError('min')) {
-        <span class=" text-xs"> El valor minimo es de {{price?.getError('min').min}}, el valor actual es de {{price?.getError('min').actual}} </span>
-      }
-    </mat-error>
-    }
 
 
-  </mat-form-field>
-</div>
+    </mat-form-field>
+  </div>
+
+  <!-- boton-->
+
+  <button type="submit" mat-raised-button [disabled] ="form.invalid"(click)="sendData()">Enviar datos</button>
+
+
+
 
 </form>
