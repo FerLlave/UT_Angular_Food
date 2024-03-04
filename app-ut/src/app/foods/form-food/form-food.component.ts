@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { Food } from '../shared/food.model';
 import { FoodService } from '../shared/food.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -32,6 +33,8 @@ export class FormFoodComponent {
   });
 
   constructor(private formBuilder: FormBuilder, public servicioComida: FoodService) {}
+  route: ActivatedRoute = inject(ActivatedRoute);
+
 
   public sendData() {
     //validando formulario

@@ -11,8 +11,7 @@ import { Food } from '../../../foods/shared/food.model';
   styleUrl: './dialog-confirm.component.scss'
 })
 export class DialogConfirmComponent {
-  food: any;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Food){
+   constructor(@Inject(MAT_DIALOG_DATA) public food: Food){
 
   }
 

@@ -24,6 +24,11 @@ export default[
         path:'details-food/:id',
         component:DetailsFoodComponent,
         title:'Detalles'
+    },
+    {
+        path:'form/:id',
+        component:FormFoodComponent,
+        title:'Actualizar comida'
     }
 
 ]satisfies Route[];

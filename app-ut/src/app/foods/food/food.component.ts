@@ -24,6 +24,9 @@ export class FoodComponent {
   }
 
   openDialog(deleteFood:Food) {
+
+    console.log(deleteFood)
+
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
       data:deleteFood
        
@@ -34,7 +37,7 @@ export class FoodComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      if (result === true) {
+      if (result == true) {
         this.serviceFood.deleteFood(deleteFood);
       }
     });
