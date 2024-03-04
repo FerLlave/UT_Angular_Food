@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -20,21 +20,62 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 
-export class FormFoodComponent {
+export class FormFoodComponent implements OnInit {
 
-    form = this.formBuilder.group({
+  form = this.formBuilder.group({
     name: ['', [Validators.required]],
     description: ['', [Validators.required, Validators.minLength(20)]],
     image: ['', [Validators.required]],
     category: ['', [Validators.required]],
-    price: [, [Validators.required, Validators.min(1)]]
+    price: ['', [Validators.required, Validators.min(1)]]
 
 
   });
 
-  constructor(private formBuilder: FormBuilder, public servicioComida: FoodService) {}
-  route: ActivatedRoute = inject(ActivatedRoute);
+  constructor(private formBuilder: FormBuilder, public servicioComida: FoodService) { }
 
+
+  route: ActivatedRoute = inject(ActivatedRoute);
+  foodId: number = -1;
+  edit: boolean = false;
+  food?: Food = {
+    id: 0,
+    name: '',
+    description: '',
+    category: '',
+    image: '',
+    price: 0
+  }
+
+  ngOnInit(): void {
+    if (this.route.snapshot.params['id']) {
+      this.edit = true;
+      console.log('esta comida se puede actualizar' + this.edit)
+      this.foodId = Number(this.route.snapshot.params['id']);
+      this.food = this.servicioComida.getOne(this.foodId);
+      if (this.food) {
+        /*this.name?.setValue(this.food?.name)
+        this.category?.setValue(this.food.category)*/
+        this.form.patchValue({
+          name: this.food.name,
+          category: this.food.category,
+          description: this.food.description,
+          image: this.food.image,
+          price: this.food.price.toString()
+
+        })
+      }
+
+
+
+
+    }
+  }
+
+  public updateData() {
+    console.log('actualizando comida')
+
+  }
 
   public sendData() {
     //validando formulario
@@ -56,7 +97,7 @@ export class FormFoodComponent {
 
         //imprimiendo
         console.log(comida);
-        
+
         this.servicioComida.addFood(comida);
         console.log(this.servicioComida.getAllFoods());
 

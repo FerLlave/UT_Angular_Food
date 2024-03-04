@@ -2,14 +2,18 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Food } from '../shared/food.model';
 import { FoodService } from '../shared/food.service';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-details-food',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, MatCardModule, MatButtonModule, CurrencyPipe,TitleCasePipe],
   templateUrl: './details-food.component.html',
   styleUrl: './details-food.component.scss'
 })
+
 export class DetailsFoodComponent implements OnInit {
   constructor(private activeRoute: ActivatedRoute, public serviceFood: FoodService) { }
 
@@ -35,3 +39,5 @@ export class DetailsFoodComponent implements OnInit {
   }
 
 }
+
+
