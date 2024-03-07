@@ -110,10 +110,10 @@ export class FoodService {
   }
 
   public updateFood(newFood: Food) {
-    this.menu.forEach((food, index) => {
+    this.menu.forEach((item, index) => {
 
-      if (food.id == newFood.id) {
-        food = newFood;
+      if (item.id == newFood.id) {
+        this.menu [index] = newFood;
       }
     });
 

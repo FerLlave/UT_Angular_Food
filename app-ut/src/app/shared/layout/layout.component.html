@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <button mat-icon-button (click)="open()" class="example-icon" aria-label="Example icon-button with menu icon">
+    <button mat-icon-button (click)="snav.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
     <span>My App</span>
@@ -15,7 +15,8 @@
   <!-- contenedor y side bar-->
   
 <mat-drawer-container class="w-full h-full pt-10">
-    <mat-drawer mode="side" [opened]="opened" class ="w-60 px-2 pt-16">
+    <mat-drawer [mode]="mobileQuery.matches ? 'over' : 'side'" #snav [opened]="mobileQuery.matches ? 'false' : 'true'"
+     class ="w-60 px-2 pt-16">
       <!-- menu de opciones-->
       
       <mat-nav-list>
@@ -26,6 +27,8 @@
 
           </mat-list-item>
         }
+       
+       
       </mat-nav-list>
       
     </mat-drawer>

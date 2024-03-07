@@ -7,14 +7,24 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { Food } from '../shared/food.model';
 import { FoodService } from '../shared/food.service';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-form-food',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatSelectModule, ReactiveFormsModule, MatButton],
+  imports: [
+    MatFormFieldModule, 
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatButton,
+    RouterModule,
+    MatIcon
+  ],
   templateUrl: './form-food.component.html',
   styleUrl: './form-food.component.scss'
 })
@@ -32,7 +42,7 @@ export class FormFoodComponent implements OnInit {
 
   });
 
-  constructor(private formBuilder: FormBuilder, public servicioComida: FoodService) { }
+  constructor(private formBuilder: FormBuilder, public servicioComida: FoodService, public router:Router) { }
 
 
   route: ActivatedRoute = inject(ActivatedRoute);
@@ -65,15 +75,37 @@ export class FormFoodComponent implements OnInit {
 
         })
       }
-
-
-
-
     }
   }
 
   public updateData() {
+    if (this.form.status == 'VALID') {
+      //validando cada dato
+      if (this.name?.value && this.description?.value && this.category?.value && this.image?.value && this.price?.value) {
+
+        let price = parseInt(this.price.value);
+
+        //creando el objeto
+        let comida: Food = {
+          id:this.foodId,
+          name: this.name.value,
+          description: this.description.value,
+          category: this.category?.value,
+          image: this.image?.value,
+          price: price
+        };
+
+       
+       //actualizando
+        this.servicioComida.updateFood(comida); 
+        //redirigir a lista    
+        this.router.navigate( ['/food/food-list'] )
+      }
+      
+
+    }
     console.log('actualizando comida')
+    
 
   }
 
@@ -87,7 +119,6 @@ export class FormFoodComponent implements OnInit {
 
         //creando el objeto
         let comida: Food = {
-
           name: this.name.value,
           description: this.description.value,
           category: this.category?.value,
@@ -95,11 +126,11 @@ export class FormFoodComponent implements OnInit {
           price: price
         };
 
-        //imprimiendo
-        console.log(comida);
-
+        //Añadiendo nueva comida
+       
         this.servicioComida.addFood(comida);
-        console.log(this.servicioComida.getAllFoods());
+        this.router.navigate( ['/food/food-list'] )
+     
 
       }
 
